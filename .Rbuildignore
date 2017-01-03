@@ -1,0 +1,6 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^.RData$
+^.Rhistory$
+^\.travis\.yml$
+^\.git$
