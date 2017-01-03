@@ -1,5 +1,3 @@
-require("httr")
-
 #' Imports a dataset intro Traitbase.
 #'
 #' @param cnx The connection to traitbase service.
