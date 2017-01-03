@@ -9,7 +9,8 @@ require("httr")
 #' @export
 #' @examples
 #' cnx <- connect("http://www.traitbase.info", "demo", "1234")
-#' csvData <- read.csv2("../../data/sample-error.csv")
+#' fpath <- system.file("extdata", "sample-error.csv", package="traitbaser")
+#' csvData <- readLines(fpath)
 #' errors <- validateDataset(cnx, csvData)
 
 validateDataset <- function(cnx, csvData) {

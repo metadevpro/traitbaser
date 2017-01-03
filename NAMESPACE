@@ -3,7 +3,7 @@
 export(buildCondition)
 export(connect)
 export(count)
-export(importDataSet)
+export(importDataset)
 export(query)
 export(queryRaw)
 export(resource)
