@@ -1,20 +1,9 @@
-context("validateImport")
+context("importDataset")
 
-test_that("validateImport OK should work", {
-  cnx <- connect("http://www.traitbase.info", "demo", "1234")
-  txt <- readLines("data-ok.csv")
-  out <- validateDataset(cnx, txt)
-
-  expect_equal(TRUE, is.list(out))
-  expect_equal(TRUE, out$valid)
-  expect_equal(FALSE, out$imported)
-  expect_equal(0, length(out$errors))
-})
-
-test_that("validateImport Error should fail with errors", {
+test_that("importDataset Error should fail with errors", {
   cnx <- connect("http://www.traitbase.info", "demo", "1234")
   txt <- readLines("data-error.csv")
-  out <- validateDataset(cnx, txt)
+  out <- importDataset(cnx, txt)
 
   expect_equal(TRUE, is.list(out))
   expect_equal(FALSE, out$valid)
