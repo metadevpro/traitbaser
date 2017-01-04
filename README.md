@@ -11,7 +11,6 @@ R Package for accesing the API of [Traitbase](https://www.traitbase.info) projec
 library(traitbaser)
 install_github("metadevpro/traitbaser")
 
-
 ```
 
 ## Authors
