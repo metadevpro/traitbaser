@@ -7,8 +7,6 @@ nullToNA <- function(x) {
   return(x)
 }
 
-
-
 urlEncode <- function(value) {
   if (mode(value) == "numeric") {
     return (value)
@@ -43,4 +41,43 @@ buildQueryConditions <- function(conditionList=NULL) {
 
   res <- paste0(res, "}")
   return(res)
+}
+
+# encode a dataframe to a CSV string
+df2csv <- function(df) {
+  lines <- capture.output(write.csv(df, stdout(), row.names=FALSE))
+  text = paste(lines, collapse ="\n")
+  return (text)
+}
+
+
+# encode literal for CSV
+quote4csv <- function(data) {
+  if (mode(data) == "numeric") {
+    return (toString(data))
+  }
+  if (mode(data) == "character") {
+    return (protectCommas(data))
+  }
+  if (mode(data) == "logical") {
+    if (data == TRUE) {
+      return ("true")
+    } else {
+      return ("false")
+    }
+  }
+  if (is.null(data) ) {
+    return ("")
+  }
+  return (data)
+}
+
+# add quotes if text contains comma or quotes
+# also double escape quotes if present
+protectCommas <- function(data) {
+  if (grepl(",|\"", data)) {
+    data2 <- gsub("\"", "\"\"", data)  # escape quote (") as ("")
+    return (paste0("\"", data2, "\"")) # wrap on quotes
+  }
+  return (data)
 }
