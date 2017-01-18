@@ -45,7 +45,7 @@ buildQueryConditions <- function(conditionList=NULL) {
 
 # encode a dataframe to a CSV string
 df2csv <- function(df) {
-  lines <- capture.output(write.csv(df, stdout(), row.names=FALSE))
+  lines <- capture.output(write.csv(df, stdout(), row.names=FALSE, NA=""))
   text = paste(lines, collapse ="\n")
   return (text)
 }
