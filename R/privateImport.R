@@ -6,6 +6,12 @@ privateImport <- function(cnx, csvData, validateOnly=TRUE) {
   url <- "/api/import/dataset"
   mime <- httr::add_headers("content-type"="text/csv")
 
+  if (is.data.frame(csvData)) {
+    txtData = df2csv(csvData)
+  } else {
+    txtData = csvData
+  }
+
   if (validateOnly == TRUE) {
     url <- paste0(url, "?validateOnly=true")
   }
@@ -15,7 +21,7 @@ privateImport <- function(cnx, csvData, validateOnly=TRUE) {
 
   q1 <- httr::POST(
     path=url,
-    body=csvData,
+    body=txtData,
     encode="raw",
     handle=urlbase
   )
