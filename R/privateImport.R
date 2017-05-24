@@ -16,19 +16,18 @@ privateImport <- function(cnx, csvData, validateOnly=TRUE) {
     url <- paste0(url, "?validateOnly=true")
   }
 
-  httr::set_config(aut)
-  httr::set_config(mime)
-
-  q1 <- httr::POST(
-    path=url,
-    body=txtData,
-    encode="raw",
-    handle=urlbase
+  httr::with_config(aut,
+                    httr::with_config(mime,
+                                      q1 <- httr::POST(
+                                        path=url,
+                                        body=txtData,
+                                        encode="raw",
+                                        handle=urlbase
+                                      )
+              )
   )
 
   dataQ1 <- httr::content(q1, type="application/json")
-
-  httr::set_config(httr::content_type(""))
 
   return (dataQ1)
 }
