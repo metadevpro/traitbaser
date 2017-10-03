@@ -16,4 +16,4 @@ Imports:
     httr
 Suggests:
     testthat (>= 0.8.0)
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
