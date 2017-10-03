@@ -14,7 +14,7 @@
 #' #not run
 #' species <- c("Osmia rufa", "Osmia bicornis", "Osmia ruffa",
 #'            "Osmia wikifluqie", "watermelon pie", "Osmia sp.")
-#' cleanSpecies(species)
+#' #'cleanSpecies(species)
 #' @export
 cleanSpecies <- function(species, verbose = TRUE, db = "itis"){
     species <- as.character(species)
