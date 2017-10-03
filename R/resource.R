@@ -9,10 +9,9 @@
 #' This resource object can be used to make queries, count and manipulate data in the backend.
 #' @export
 #' @examples
-#' cnx <- connect("http://jacaton-r.herokuapp.com", "demo", "1234")
-#' exo <- resource(cnx, "exoplanets")
-#' whe <- resource(cnx, "wheathers")
-#' oly <- resource(cnx, "olympicMedals")
+#' cnx <- connect("http://www.traitbase.info", "demo", "1234")
+#' exo <- resource(cnx, "species")
+#' whe <- resource(cnx, "schemas")
 
 resource <-  function(connection, resourceName) {
   res <- list(connection[[1]], connection[[2]], connection[[3]],connection[[4]], resourceName)

@@ -20,9 +20,9 @@ syntax as defined here:
 https://github.com/wprl/baucis/wiki/Query-String-Parameters
 }
 \examples{
-cnx <- connect("http://jacaton-r.herokuapp.com", "demo", "1234")
-off <- resource(cnx, "oficinas")
+cnx <- connect("http://www.traitbase.info", "demo", "1234")
+spe <- resource(cnx, "species")
 
-queryRaw(off, "?skip=2&limit=3")
+queryRaw(spe, "?skip=2&limit=3")
 }
 

@@ -23,5 +23,6 @@ This correct misspellings, synonyms and flags not recognizes species.
 #not run
 species <- c("Osmia rufa", "Osmia bicornis", "Osmia ruffa",
            "Osmia wikifluqie", "watermelon pie", "Osmia sp.")
-cleanSpecies(species)
+#'cleanSpecies(species)
 }
+

@@ -5,7 +5,7 @@ test_that("query species", {
   resource <- resource(cnx, "species")
   out <- query(resource)
   expect_equal(TRUE, length(out) > -1)
-  expect_equal(8, ncol(out))
+  expect_equal(9, ncol(out))
 })
 
 test_that("query species limit=1", {
@@ -13,7 +13,7 @@ test_that("query species limit=1", {
   resource <- resource(cnx, "species")
   out <- query(resource, limit=1)
   expect_equal(1, nrow(out))
-  expect_equal(8, ncol(out))
+  expect_equal(9, ncol(out))
 })
 
 test_that("query species limit=2 skip=1", {
@@ -21,7 +21,7 @@ test_that("query species limit=2 skip=1", {
   resource <- resource(cnx, "species")
   out <- query(resource, limit=2, skip=1)
   expect_equal(2, nrow(out))
-  expect_equal(8, ncol(out))
+  expect_equal(9, ncol(out))
 })
 
 test_that("query species limit=1 names", {
@@ -31,8 +31,8 @@ test_that("query species limit=1 names", {
   n <- names(out)
   expect_equal(1, nrow(out))
   expect_equal("_id", n[[1]])
-  expect_equal("genus", n[[2]])
-  expect_equal("species", n[[3]])
+  expect_equal("species", n[[2]])
+  expect_equal("order", n[[3]])
 })
 
 test_that("query species limit=1 with condition", {
