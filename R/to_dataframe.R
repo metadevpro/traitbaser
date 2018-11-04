@@ -18,6 +18,7 @@
 #' ds <- resource(cnx, 'datasets')
 #' cont <- resource(cnx, 'contributors')
 #' }
+
 to_dataframe <- function(response, keep_metadata = "clean") {
     if (!keep_metadata %in% c("clean", "raw", "raw_links")) {
         message("keep_metadata has to be clean, raw or raw_links")

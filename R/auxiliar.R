@@ -33,19 +33,12 @@ df2csv <- function(df) {
 
 # encode literal for CSV
 quote4csv <- function(data) {
-    if (mode(data) == "numeric") {
-        return(toString(data))
-    }
-    if (mode(data) == "character") {
-        return(protectCommas(data))
-    }
-    if (is.logical(data)) {
-        data <- ifelse(data, "true", "false")
-    }
-    if (is.null(data)) {
-        return("")
-    }
-    data
+  if (is.logical(data)) {
+      data <- ifelse(data, "true", "false")
+  } else {
+    data <- protectCommas(paste0("", data))
+  }
+  data
 }
 
 # add quotes if text contains comma or quotes also double escape quotes
