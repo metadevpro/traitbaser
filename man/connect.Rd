@@ -4,7 +4,7 @@
 \alias{connect}
 \title{Creates a connection.}
 \usage{
-connect(url = "http://www.tratibase.info", user = "demo", pass = "")
+connect(url = "http://www.traitbase.info", user = "demo", pass = "")
 }
 \arguments{
 \item{url}{The base URL to connect to. Default value: https://traitbase.info}

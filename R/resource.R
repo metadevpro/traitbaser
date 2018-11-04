@@ -15,5 +15,5 @@
 #' whe <- resource(cnx, 'schemas')
 #' }
 resource <- function(connection, resourceName) {
-    c(connection[seq_len(4), resourceName)
+    c(connection[seq_len(4)], resourceName)
 }
