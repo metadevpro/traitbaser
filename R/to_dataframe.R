@@ -12,11 +12,12 @@
 #' @return \code{resource()} returns a resource object for a Hivepod backend.
 #' This resource object can be used to make queries, count and manipulate data in the backend.
 #' @examples
+#' \donttest{
 #' cnx <- connect('http://www.traitbase.info', 'demo', '1234')
 #' sp <- resource(cnx, 'species')
 #' ds <- resource(cnx, 'datasets')
 #' cont <- resource(cnx, 'contributors')
-
+#' }
 to_dataframe <- function(response, keep_metadata = "clean") {
     if (!keep_metadata %in% c("clean", "raw", "raw_links")) {
         message("keep_metadata has to be clean, raw or raw_links")
@@ -28,7 +29,7 @@ to_dataframe <- function(response, keep_metadata = "clean") {
         }
         nvariales <- length(unlist(responseNA[[1]]))
         ncases <- length(responseNA)
-        datamatrix <- matrix(data = dat, nrow = ncases, ncol = nvariales, 
+        datamatrix <- matrix(data = dat, nrow = ncases, ncol = nvariales,
             byrow = TRUE)
         colnames(datamatrix) <- names(unlist(responseNA[[1]]))
         datamatrix <- as.data.frame(datamatrix)

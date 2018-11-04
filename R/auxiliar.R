@@ -7,40 +7,24 @@ nullToNA <- function(x) {
     x
 }
 
-urlEncode <- function(value) {
-    if (mode(value) == "numeric") {
-        value <- value
-    }
-    if (is.character(value)) {
-        value <- paste0("\"", utils::URLencode(value), "\"")
-    }
-    if (is.logical(value)) {
-        value <- ifelse(value, "true", "false")
-    }
-    if (is.null(value)) {
-        value <- "null"
-    }
-    value
-}
-
 buildQueryConditions <- function(conditionList = NULL) {
     if (is.null(conditionList)) {
         return(NA)
     }
     res <- "conditions={"
     prefix <- ""
-    
+
     for (i in 1:length(conditionList)) {
         res <- paste0(res, prefix, conditionList[i])
         prefix = ","
     }
-    
+
     paste0(res, "}")
 }
 
 # encode a dataframe to a CSV string
 df2csv <- function(df) {
-    lines <- utils::capture.output(utils::write.csv(df, stdout(), row.names = FALSE, 
+    lines <- utils::capture.output(utils::write.csv(df, stdout(), row.names = FALSE,
         na = ""))
     text <- paste(lines, collapse = "\n")
     text
@@ -72,4 +56,26 @@ protectCommas <- function(data) {
         return(paste0("\"", data2, "\""))  # wrap on quotes
     }
     data
+}
+
+privateImport <- function(cnx, csvData, validateOnly = TRUE) {
+    urlbase <- httr::handle(cnx[[1]])
+    aut <- httr::authenticate(cnx[[2]], cnx[[3]])
+    url <- "/api/import/dataset"
+    mime <- httr::add_headers(`content-type` = "text/csv")
+
+    if (is.data.frame(csvData)) {
+        txtData = df2csv(csvData)
+    } else {
+        txtData = csvData
+    }
+
+    if (validateOnly) {
+        url <- paste0(url, "?validateOnly=true")
+    }
+
+    httr::with_config(aut, httr::with_config(mime, q1 <- httr::POST(path = url,
+        body = txtData, encode = "raw", handle = urlbase)))
+
+    httr::content(q1, type = "application/json")
 }

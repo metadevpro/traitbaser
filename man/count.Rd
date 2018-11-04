@@ -20,9 +20,11 @@ Returns the total count of rows in a query.
 Returns the total count of rows in a query.
 }
 \examples{
+\donttest{
 cnx <- connect('http://www.traitbase.info', 'demo', '1234')
 off <- resource(cnx, 'species')
 
 count(off)
 count(off, conditions=buildCondition('species', '!=', 'Bombus')  )
+}
 }

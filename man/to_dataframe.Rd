@@ -23,8 +23,10 @@ This resource object can be used to make queries, count and manipulate data in t
 Private function. Converts returned JSON data into an R dataframe.
 }
 \examples{
+\donttest{
 cnx <- connect('http://www.traitbase.info', 'demo', '1234')
 sp <- resource(cnx, 'species')
 ds <- resource(cnx, 'datasets')
 cont <- resource(cnx, 'contributors')
+}
 }
