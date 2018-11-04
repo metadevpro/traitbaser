@@ -1,5 +1,12 @@
 context("auxiliar")
 
+
+test_that("tests protectCommas", {
+  expect_equal(unlist(nullToNA(list(2, NULL, 3))),
+    c(2, NA, 3))
+})
+
+
 test_that("tests protectCommas", {
   # protectCommas does nothing if no comma: abc
   expect_equal(protectCommas("abc"), "abc")

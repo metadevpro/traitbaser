@@ -1,11 +1,11 @@
 # Private Auxiliar functions. -------------------------- Not exposed in
 # the public package API.
 
-
 nullToNA <- function(x) {
-    x[sapply(x, is.null)] <- NA
+    x[unlist(lapply(x, is.null))] <- NA
     x
 }
+
 
 buildQueryConditions <- function(conditionList = NULL) {
     if (is.null(conditionList)) {
@@ -26,8 +26,17 @@ buildQueryConditions <- function(conditionList = NULL) {
 df2csv <- function(df) {
     lines <- utils::capture.output(utils::write.csv(df, stdout(), row.names = FALSE,
         na = ""))
-    text <- paste(lines, collapse = "\n")
-    text
+    paste(lines, collapse = "\n")
+}
+
+# add quotes if text contains comma or quotes also double escape quotes
+# if present
+protectCommas <- function(data) {
+    if (grepl(",|\"", data)) {
+        data2 <- gsub("\"", "\"\"", data)  # escape quote (') as ('')
+        return(paste0("\"", data2, "\""))  # wrap on quotes
+    }
+    data
 }
 
 
@@ -41,15 +50,6 @@ quote4csv <- function(data) {
   data
 }
 
-# add quotes if text contains comma or quotes also double escape quotes
-# if present
-protectCommas <- function(data) {
-    if (grepl(",|\"", data)) {
-        data2 <- gsub("\"", "\"\"", data)  # escape quote (') as ('')
-        return(paste0("\"", data2, "\""))  # wrap on quotes
-    }
-    data
-}
 
 privateImport <- function(cnx, csvData, validateOnly = TRUE) {
     urlbase <- httr::handle(cnx[[1]])

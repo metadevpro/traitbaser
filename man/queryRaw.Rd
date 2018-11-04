@@ -19,3 +19,11 @@ Executes a query allowing pasing a direct Hivepod/Baucis query using JSON
 syntax as defined here:
 https://github.com/wprl/baucis/wiki/Query-String-Parameters
 }
+\examples{
+\donttest{
+cnx <- connect('http://www.traitbase.info', 'demo', '1234')
+spe <- resource(cnx, 'species')
+
+queryRaw(spe, '?skip=2&limit=3')
+}
+}

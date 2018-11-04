@@ -15,7 +15,7 @@
 #' spe <- resource(cnx, 'species')
 #'
 #' queryRaw(spe, '?skip=2&limit=3')
-#' {}
+#' }
 
 queryRaw <- function(resource, query) {
     urlbase <- httr::handle(resource[[1L]])
