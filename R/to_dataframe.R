@@ -26,13 +26,13 @@ to_dataframe <- function(response, keep_metadata = "clean") {
         responseNA <- lapply(response, nullToNA)
         dat <- unlist(responseNA)
         if (length(responseNA) == 0) {
-            return()
+            return(NULL)
         }
-        nvariales <- length(unlist(responseNA[[1]]))
+        nvariales <- length(unlist(responseNA[[1L]]))
         ncases <- length(responseNA)
         datamatrix <- matrix(data = dat, nrow = ncases, ncol = nvariales,
             byrow = TRUE)
-        colnames(datamatrix) <- names(unlist(responseNA[[1]]))
+        colnames(datamatrix) <- names(unlist(responseNA[[1L]]))
         datamatrix <- as.data.frame(datamatrix)
         utils::head(datamatrix)
         idnum <- grep("_id", colnames(datamatrix), fixed = TRUE)

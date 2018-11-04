@@ -17,14 +17,14 @@ require("httr")
 #' cnx <- connect('http://www.traitbase.info', 'demo', '1234')
 #' }
 
-connect <- function(url = "http://www.tratibase.info", user = "demo", pass = "") {
+connect <- function(url = "http://www.traitbase.info", user = "demo", pass = "") {
     urlbase <- httr::handle(url)
     rping <- httr::GET(handle = urlbase, path = "ping")
     dataPing <- httr::content(rping, type = "application/json")
-    
-    status <- httr::GET(handle = urlbase, config = httr::authenticate(user, 
+
+    status <- httr::GET(handle = urlbase, config = httr::authenticate(user,
         pass), path = "api/status")
     dataQ1 <- httr::content(status, type = "application/json")
-    
+
     list(url, user, pass, status)
 }

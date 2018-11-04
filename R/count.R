@@ -22,10 +22,9 @@ count <- function(resource, conditions = NULL, distinct = NULL) {
     urlbase <- httr::handle(resource[[1L]])
     aut <- httr::authenticate(resource[[2L]], resource[[3L]])
 
-    query <- "?count=true"
-    prefix <- "&"
+    query <- "?count=true&"
     if (!is.null(conditions)) {
-        query <- paste0(query, prefix, buildQueryConditions(conditions))
+        query <- paste0(query, buildQueryConditions(conditions))
     }
 
     q1 <- httr::GET(handle = urlbase, config = aut, path = paste0("api/",
