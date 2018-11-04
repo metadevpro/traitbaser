@@ -13,7 +13,9 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
-    httr
+    httr,
+    taxize,
+    utils
 Suggests:
     testthat (>= 0.8.0)
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.0

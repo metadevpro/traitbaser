@@ -1,17 +1,20 @@
 # traitbaser
 
-R Package for accesing the API of [Traitbase](https://www.traitbase.info) project.
+R Client for the API of the [Traitbase](https://www.traitbase.info) project.
 
 [![Build Status](https://travis-ci.org/metadevpro/traitbaser.svg?branch=master)](https://travis-ci.org/metadevpro/traitbaser)
 [![codecov](https://codecov.io/gh/metadevpro/traitbaser/branch/master/graph/badge.svg)](https://codecov.io/gh/metadevpro/traitbaser)
 
+
 ## Usage
 
-```
-library(traitbaser)
-install_github("metadevpro/traitbaser")
+NB: the R package [devtools](https://cran.r-project.org/web/packages/devtools/index.html) is required. 
 
+```R
+library(traitbaser)
+devtools::install_github("metadevpro/traitbaser")
 ```
+
 
 ## Authors
 

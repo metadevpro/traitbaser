@@ -12,18 +12,19 @@ require("httr")
 #' This connection object can be used to discover and access to resources.
 #' @export
 #' @examples
-#' cnx <- connect("http://www.traitbase.info", "demo", "1234")
+#' \donttest{
+#' # not run
+#' cnx <- connect('http://www.traitbase.info', 'demo', '1234')
+#' }
 
-connect <- function(url="http://www.tratibase.info", user="demo", pass="") {
-  urlbase <- httr::handle(url)
-  rping <- httr::GET(handle=urlbase, path="ping")
-  dataPing <- httr::content(rping, type="application/json")
-
-  status <- httr::GET(handle=urlbase,
-                      config=httr::authenticate(user, pass),
-                      path="api/status")
-  dataQ1 <- httr::content(status, type="application/json")
-
-  con <- list(url, user, pass, status)
-  return (con)
+connect <- function(url = "http://www.tratibase.info", user = "demo", pass = "") {
+    urlbase <- httr::handle(url)
+    rping <- httr::GET(handle = urlbase, path = "ping")
+    dataPing <- httr::content(rping, type = "application/json")
+    
+    status <- httr::GET(handle = urlbase, config = httr::authenticate(user, 
+        pass), path = "api/status")
+    dataQ1 <- httr::content(status, type = "application/json")
+    
+    list(url, user, pass, status)
 }

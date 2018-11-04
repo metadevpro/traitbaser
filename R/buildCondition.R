@@ -11,20 +11,23 @@
 #' parameter to build complex queries.
 #' @export
 #' @examples
-#' cnx <- connect("http://www.traitbase.info", "demo", "1234")
-#' off <- resource(cnx, "species")
+#' \donttest{
+#' cnx <- connect('http://www.traitbase.info', 'demo', '1234')
+#' off <- resource(cnx, 'species')
 #'
 #' count(off)
-#' count(off, conditions=buildCondition("species", "!=", "Bombus")  )
-#' count(off, conditions=buildCondition("species", "==", "Bombus")  )
-#' query(off, conditions=buildCondition("species", "==", "Bombus")  )
+#' count(off, conditions=buildCondition('species', '!=', 'Bombus')  )
+#' count(off, conditions=buildCondition('species', '==', 'Bombus')  )
+#' query(off, conditions=buildCondition('species', '==', 'Bombus')  )
+#' }
 
 buildCondition <- function(variable, operator, value) {
-  if (operator == "==") {
-    cond <- paste0("\"", variable, "\":", urlEncode(value))
-  }
-  if (operator == "!=") {
-    cond <- paste0("\"", variable, "\":{\"$not\":{\"$eq\":", urlEncode(value), "}}")
-  }
-  return (cond)
+    if (operator == "==") {
+        cond <- paste0("\"", variable, "\":", utils::URLencode(value))
+    }
+    if (operator == "!=") {
+        cond <- paste0("\"", variable, "\":{\"$not\":{\"$eq\":", utils::URLencode(value),
+            "}}")
+    }
+    cond
 }

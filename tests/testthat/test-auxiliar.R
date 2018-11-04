@@ -37,6 +37,10 @@ test_that("quote4csv works on strings: a\"b", {
   expect_equal(out, "\"a\"\"b\"")
 })
 
+
+
+
+
 test_that("quote4csv works on booleans: TRUE", {
   out <- quote4csv(TRUE)
   expect_equal(out, "true")
@@ -45,7 +49,6 @@ test_that("quote4csv works on booleans: FALSE", {
   out <- quote4csv(FALSE)
   expect_equal(out, "false")
 })
-
 test_that("quote4csv works on numbers: 0", {
   out <- quote4csv(0)
   expect_equal(out, "0")
@@ -66,3 +69,6 @@ test_that("df2csv works", {
 })
 
 
+
+
+urlEncode(123)
