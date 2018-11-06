@@ -4,3 +4,5 @@
 ^.Rhistory$
 ^\.travis\.yml$
 ^\.git$
+Makefile
+CONDUCT.md

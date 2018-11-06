@@ -18,9 +18,10 @@ Returns a list of errors if any. valid=(true|false), imported=false
 Validates a dataset prior an import operation.
 }
 \examples{
-cnx <- connect("http://www.traitbase.info", "demo", "1234")
-fpath <- system.file("extdata", "sample-error.csv", package="traitbaser")
+\donttest{
+cnx <- connect('http://www.traitbase.info', 'demo', '1234')
+fpath <- system.file('extdata', 'sample-error.csv', package='traitbaser')
 csvData <- readLines(fpath)
 errors <- validateDataset(cnx, csvData)
 }
-
+}

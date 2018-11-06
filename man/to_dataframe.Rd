@@ -11,9 +11,9 @@ to_dataframe(response, keep_metadata = "clean")
 
 \item{keep_metadata}{Flag to indicate if metadatata should be handled.
 Suported values are:
-   - "clean"     -  remove metadata (default one)
-   - "raw"       -  remove metadata
-   - "raw_links" -  remove metadata links}
+   - 'clean'     -  remove metadata (default one)
+   - 'raw'       -  remove metadata
+   - 'raw_links' -  remove metadata links}
 }
 \value{
 \code{resource()} returns a resource object for a Hivepod backend.
@@ -23,9 +23,10 @@ This resource object can be used to make queries, count and manipulate data in t
 Private function. Converts returned JSON data into an R dataframe.
 }
 \examples{
-cnx <- connect("http://www.traitbase.info", "demo", "1234")
-sp <- resource(cnx, "species")
-ds <- resource(cnx, "datasets")
-cont <- resource(cnx, "contributors")
+\donttest{
+cnx <- connect('http://www.traitbase.info', 'demo', '1234')
+sp <- resource(cnx, 'species')
+ds <- resource(cnx, 'datasets')
+cont <- resource(cnx, 'contributors')
 }
-
+}

@@ -1,19 +1,21 @@
 Package: traitbaser
 Title: R package providing API access to Traitbase https://www.traitbase.info
-Version: 0.0.0.9003
+Version: 0.0.0.9004
 Author: c( person("Pedro J.", "Molina", ,"pjmolina@gmail.com", role = c("aut",
     "cre")), person("Ignasi", "Bartomeus", , "nacho.bartomeus@gmail.com", role =
     c("aut", "cre")) )
 Maintainer: Pedro J. Molina <pjmolina@gmail.com>
 Description: R client for Traitbase project. Allows to query, validate and
-    import trait's datasets for ecological interations.
+    import trait's datasets for ecological interactions.
 Depends:
     R (>= 3.2.3)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
-    httr
+    httr,
+    taxize,
+    utils
 Suggests:
     testthat (>= 0.8.0)
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.0

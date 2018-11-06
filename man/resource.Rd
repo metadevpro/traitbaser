@@ -19,8 +19,9 @@ This resource object can be used to make queries, count and manipulate data in t
 Setups and returns a resource available in a Hivepod backend.
 }
 \examples{
-cnx <- connect("http://www.traitbase.info", "demo", "1234")
-exo <- resource(cnx, "species")
-whe <- resource(cnx, "schemas")
+\donttest{
+cnx <- connect('http://www.traitbase.info', 'demo', '1234')
+exo <- resource(cnx, 'species')
+whe <- resource(cnx, 'schemas')
 }
-
+}

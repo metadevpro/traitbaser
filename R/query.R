@@ -13,37 +13,39 @@
 #' @return Returns a dataframe with the returned data.
 #' @export
 #' @examples
-#' cnx <- connect("http://www.traitbase.info", "demo", "1234")
-#' off <- resource(cnx, "species")
+#' \donttest{
+#' cnx <- connect('http://www.traitbase.info', 'demo', '1234')
+#' off <- resource(cnx, 'species')
 #'
 #' query(off)
-#' query(off, conditions=buildCondition("species", "==", "Bombus")  )
+#' query(off, conditions=buildCondition('species', '==', 'Bombus')  )
 #' query(off, limit=2, skip=0)
 #' query(off, limit=2, skip=2)
+#' }
 
-query <- function(resource, limit=-1, skip=0, conditions=NULL, sort, selectFields, distinct) {
-  urlbase <- httr::handle(resource[[1]])
-  aut <- httr::authenticate(resource[[2]], resource[[3]])
+query <- function(resource, limit = -1, skip = 0, conditions = NULL, sort,
+    selectFields, distinct) {
+    urlbase <- httr::handle(resource[[1]])
+    aut <- httr::authenticate(resource[[2]], resource[[3]])
 
-  query <- ""
-  prefix <- "?"
-  if (limit!=-1) {
-    query <- paste0(prefix, "limit=", limit)
-    prefix <- "&"
-  }
-  if (skip!=0) {
-    query <- paste0(query, prefix, "skip=", skip)
-    prefix <- "&"
-  }
-  if (!is.null(conditions)) {
-    query <- paste0(query, prefix, buildQueryConditions(conditions))
-    prefix <- "&"
-  }
+    query <- ""
+    prefix <- "?"
+    if (limit != -1) {
+        query <- paste0(prefix, "limit=", limit)
+        prefix <- "&"
+    }
+    if (skip != 0) {
+        query <- paste0(query, prefix, "skip=", skip)
+        prefix <- "&"
+    }
+    if (!is.null(conditions)) {
+        query <- paste0(query, prefix, buildQueryConditions(conditions))
+        prefix <- "&"
+    }
 
-  q1 <- httr::GET(handle=urlbase, config=aut, path=paste("api/", resource[[5]], query, sep="") )
-  dataQ1 <- httr::content(q1, type="application/json")
-  df <- to_dataframe(dataQ1)
-  return (df)
+    q1 <- httr::GET(handle = urlbase, config = aut, path = paste("api/",
+        resource[[5]], query, sep = ""))
+    dataQ1 <- httr::content(q1, type = "application/json")
+    ## output
+    to_dataframe(dataQ1)
 }
-
-

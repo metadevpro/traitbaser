@@ -1,68 +1,43 @@
 context("auxiliar")
 
-test_that("protectCommas do nothing if no comma: abc", {
-  out <- protectCommas("abc")
-  expect_equal(out, "abc")
-})
-test_that("protectCommas do nothing if no comma: 12.3", {
-  out <- protectCommas("12.3")
-  expect_equal(out, "12.3")
-})
-test_that("protectCommas escapes if comma found: a,b", {
-  out <- protectCommas("a,b")
-  expect_equal(out, "\"a,b\"")
-})
-test_that("protectCommas escapes if comma found: ,bc", {
-  out <- protectCommas(",bc")
-  expect_equal(out, "\",bc\"")
-})
-test_that("protectCommas escapes if comma found: az,", {
-  out <- protectCommas("az,")
-  expect_equal(out, "\"az,\"")
-})
-test_that("protectCommas escapes if quote found: a\"z", {
-  out <- protectCommas("a\"z")
-  expect_equal(out, "\"a\"\"z\"")
-})
-test_that("quote4csv works on strings: a,b", {
-  out <- quote4csv("a,b")
-  expect_equal(out, "\"a,b\"")
-})
-test_that("quote4csv works on strings: ab", {
-  out <- quote4csv("ab")
-  expect_equal(out, "ab")
-})
-test_that("quote4csv works on strings: a\"b", {
-  out <- quote4csv("a\"b")
-  expect_equal(out, "\"a\"\"b\"")
+
+test_that("tests protectCommas", {
+  expect_equal(unlist(nullToNA(list(2, NULL, 3))),
+    c(2, NA, 3))
 })
 
-test_that("quote4csv works on booleans: TRUE", {
-  out <- quote4csv(TRUE)
-  expect_equal(out, "true")
-})
-test_that("quote4csv works on booleans: FALSE", {
-  out <- quote4csv(FALSE)
-  expect_equal(out, "false")
+
+test_that("tests protectCommas", {
+  # protectCommas does nothing if no comma: abc
+  expect_equal(protectCommas("abc"), "abc")
+  # does nothing if no comma: 12.3
+  expect_equal(protectCommas("12.3"), "12.3")
+  # escapes if comma found: a,b
+  expect_equal(protectCommas("a,b"), "\"a,b\"")
+  # escapes if comma found: ,bc
+  expect_equal(protectCommas(",bc"), "\",bc\"")
+  # escapes if comma found: az,
+  expect_equal(protectCommas("az,"), "\"az,\"")
+  # escapes if quote found: a\"z
+  expect_equal(protectCommas("a\"z"), "\"a\"\"z\"")
 })
 
-test_that("quote4csv works on numbers: 0", {
-  out <- quote4csv(0)
-  expect_equal(out, "0")
+
+test_that("tets quote4csv", {
+  # string (NB here actually protectCommas is tested again, so some test couls be dropped)
+  expect_equal(quote4csv("a,b"), "\"a,b\"")
+  expect_equal(quote4csv("ab"), "ab")
+  expect_equal(quote4csv("a\"b"), "\"a\"\"b\"")
+  # test booleans
+  expect_equal(quote4csv(TRUE), "true")
+  # test numeric
+  expect_equal(quote4csv(-14.56), "-14.56")
+  expect_equal(quote4csv(2+2i), "2+2i")
 })
-test_that("quote4csv works on numbers: -14", {
-  out <- quote4csv(-14)
-  expect_equal(out, "-14")
-})
-test_that("quote4csv works on numbers: -14.56", {
-  out <- quote4csv(-14.56)
-  expect_equal(out, "-14.56")
-})
+
 
 test_that("df2csv works", {
-  df <- read.csv(text="\"a\",\"b\",\"c\",\"d\"\r\n1,a b,-2.3,\"a, b\"\" and c\"")
+  df <- utils::read.csv(text="\"a\",\"b\",\"c\",\"d\"\r\n1,a b,-2.3,\"a, b\"\" and c\"")
   out <- df2csv(df)
   expect_equal(out, "\"a\",\"b\",\"c\",\"d\"\n1,\"a b\",-2.3,\"a, b\"\" and c\"")
 })
-
-

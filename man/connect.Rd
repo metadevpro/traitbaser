@@ -4,7 +4,7 @@
 \alias{connect}
 \title{Creates a connection.}
 \usage{
-connect(url = "http://www.tratibase.info", user = "demo", pass = "")
+connect(url = "http://www.traitbase.info", user = "demo", pass = "")
 }
 \arguments{
 \item{url}{The base URL to connect to. Default value: https://traitbase.info}
@@ -21,6 +21,8 @@ This connection object can be used to discover and access to resources.
 Setup a connection to a given Traitbase backend with credentials.
 }
 \examples{
-cnx <- connect("http://www.traitbase.info", "demo", "1234")
+\donttest{
+# not run
+cnx <- connect('http://www.traitbase.info', 'demo', '1234')
 }
-
+}
