@@ -17,5 +17,8 @@ Imports:
     taxize,
     utils
 Suggests:
-    testthat (>= 0.8.0)
-RoxygenNote: 6.1.0
+    knitr,
+    testthat (>= 0.8.0),
+    rmarkdown
+VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)
