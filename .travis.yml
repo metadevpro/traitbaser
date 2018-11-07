@@ -5,5 +5,10 @@ r_github_packages:
   - hadley/httr
   - jimhester/covr
 
+before_install:
+    - echo $TRAITBASE_USER > .Renviron
+    - echo $TRAITBASE_PWD >> .Renviron
+    - cat .Renviron
+
 after_success:
   - Rscript -e 'library(covr); codecov()'

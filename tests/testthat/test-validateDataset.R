@@ -1,7 +1,7 @@
 context("validateDataset")
 
 test_that("validateImport OK should work", {
-  cnx <- connect("http://www.traitbase.info", "demo", "1234")
+  cnx <- connect("http://www.traitbase.info")
   txt <- readLines("data-ok.csv")
   out <- validateDataset(cnx, txt)
 
@@ -12,7 +12,7 @@ test_that("validateImport OK should work", {
 })
 
 test_that("validateImport Error should fail with errors", {
-  cnx <- connect("http://www.traitbase.info", "demo", "1234")
+  cnx <- connect("http://www.traitbase.info")
   txt <- readLines("data-error.csv")
   out <- validateDataset(cnx, txt)
 
@@ -31,4 +31,3 @@ test_that("validateImport Error should fail with errors", {
   expect_equal("Unreconized or ambiguous species: 'Bombus sp'. Nearest registered in ITIS is: 'Bombus sporadicus' at line 4",
                 out$errors[[4]]$message)
 })
-

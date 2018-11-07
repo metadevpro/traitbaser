@@ -10,7 +10,7 @@ urlEncode <- function(value) {
     if (is.null(value)) {
         out <- "null"
     } else {
-        out <- switch(mode(value), character = paste0("\"", URLencode(value), 
+        out <- switch(mode(value), character = paste0("\"", utils::URLencode(value),
             "\""), logical = tolower(as.character(value)), value)
     }
     out
@@ -23,18 +23,18 @@ buildQueryConditions <- function(conditionList = NULL) {
     }
     res <- "conditions={"
     prefix <- ""
-    
+
     for (i in 1:length(conditionList)) {
         res <- paste0(res, prefix, conditionList[i])
         prefix = ","
     }
-    
+
     paste0(res, "}")
 }
 
 # encode a dataframe to a CSV string
 df2csv <- function(df) {
-    lines <- utils::capture.output(utils::write.csv(df, stdout(), row.names = FALSE, 
+    lines <- utils::capture.output(utils::write.csv(df, stdout(), row.names = FALSE,
         na = ""))
     paste(lines, collapse = "\n")
 }
@@ -66,19 +66,19 @@ privateImport <- function(cnx, csvData, validateOnly = TRUE) {
     aut <- httr::authenticate(cnx[[2L]], cnx[[3L]])
     url <- "/api/import/dataset"
     mime <- httr::add_headers(`content-type` = "text/csv")
-    
+
     if (is.data.frame(csvData)) {
-        txtData = df2csv(csvData)
+        txtData <- df2csv(csvData)
     } else {
-        txtData = csvData
+        txtData <- csvData
     }
-    
+
     if (validateOnly) {
         url <- paste0(url, "?validateOnly=true")
     }
-    
-    httr::with_config(aut, httr::with_config(mime, q1 <- httr::POST(path = url, 
+
+    httr::with_config(aut, httr::with_config(mime, q1 <- httr::POST(path = url,
         body = txtData, encode = "raw", handle = urlbase)))
-    
+
     httr::content(q1, type = "application/json")
 }

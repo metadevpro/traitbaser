@@ -35,7 +35,7 @@ set_login <- function(user = NULL, pwd = NULL) {
     ## 
     Sys.setenv(TRAITBASE_USER = user, TRAITBASE_PWD = pwd)
     ## 
-    cat("Now user and password are stored for the session.\n")
+    cat(crayon::blue("`user` and `pwd` are stored for the session.\n"))
     invisible(c(user, pwd))
 }
 
