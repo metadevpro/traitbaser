@@ -12,9 +12,9 @@ urlEncode <- function(value) {
   } else {
     out <- switch(
       mode(value),
-      numeric = value,
       character = paste0("\"", URLencode(value), "\""),
-      logical = tolower(as.character(value))
+      logical = tolower(as.character(value)),
+      value
       )
   }
   out
@@ -66,8 +66,8 @@ quote4csv <- function(data) {
 
 
 privateImport <- function(cnx, csvData, validateOnly = TRUE) {
-    urlbase <- httr::handle(cnx[[1]])
-    aut <- httr::authenticate(cnx[[2]], cnx[[3]])
+    urlbase <- httr::handle(cnx[[1L]])
+    aut <- httr::authenticate(cnx[[2L]], cnx[[3L]])
     url <- "/api/import/dataset"
     mime <- httr::add_headers(`content-type` = "text/csv")
 
