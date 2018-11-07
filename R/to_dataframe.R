@@ -30,7 +30,7 @@ to_dataframe <- function(response, keep_metadata = "clean") {
         }
         nvariales <- length(unlist(responseNA[[1L]]))
         ncases <- length(responseNA)
-        datamatrix <- matrix(data = dat, nrow = ncases, ncol = nvariales,
+        datamatrix <- matrix(data = dat, nrow = ncases, ncol = nvariales, 
             byrow = TRUE)
         colnames(datamatrix) <- names(unlist(responseNA[[1L]]))
         datamatrix <- as.data.frame(datamatrix)

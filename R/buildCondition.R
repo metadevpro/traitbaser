@@ -26,7 +26,7 @@ buildCondition <- function(variable, operator, value) {
         cond <- paste0("\"", variable, "\":", urlEncode(value))
     }
     if (operator == "!=") {
-        cond <- paste0("\"", variable, "\":{\"$not\":{\"$eq\":", urlEncode(value),
+        cond <- paste0("\"", variable, "\":{\"$not\":{\"$eq\":", urlEncode(value), 
             "}}")
     }
     cond

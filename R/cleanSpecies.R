@@ -24,7 +24,7 @@ cleanSpecies <- function(species, verbose = TRUE, db = "itis") {
     # misspellings
     species2 <- unique(species)
     temp <- taxize::gnr_resolve(species2, best_match_only = TRUE, canonical = TRUE)
-    dat <- merge(data.frame(species2), temp[, c("user_supplied_name", "matched_name2")],
+    dat <- merge(data.frame(species2), temp[, c("user_supplied_name", "matched_name2")], 
         by.x = "species2", by.y = "user_supplied_name", all.x = TRUE)
     # synonyms here we ca save time by re-doing a unique() and removing
     # NA's
@@ -32,7 +32,7 @@ cleanSpecies <- function(species, verbose = TRUE, db = "itis") {
     species3 <- species3[!is.na(species3)]
     temp <- taxize::synonyms(species3, db = db)
     synonym_ids <- grep(pattern = "acc_name", temp)  #is this the optimal solution?
-    accepted_names <- unlist(lapply(temp[synonym_ids], "[", "acc_name"),
+    accepted_names <- unlist(lapply(temp[synonym_ids], "[", "acc_name"), 
         use.names = FALSE)
     synonym_names <- species3
     synonym_names[synonym_ids] <- accepted_names[1L]
@@ -41,16 +41,16 @@ cleanSpecies <- function(species, verbose = TRUE, db = "itis") {
     # clean non accepted species
     species4 <- unique(dat$synonym_names)
     species4 <- species4[!is.na(species4)]
-    out2 <- taxize::tax_name(species4, get = "species", db = "both", pref = "itis",
+    out2 <- taxize::tax_name(species4, get = "species", db = "both", pref = "itis", 
         verbose = verbose)
     out2_u <- unique(out2$species)
     final_names <- species4
     final_names[which(!species4 %in% out2_u)] <- NA
     key2 <- data.frame(species4, final_names)
-    dat <- merge(dat, key2, by.x = "synonym_names", by.y = "species4",
+    dat <- merge(dat, key2, by.x = "synonym_names", by.y = "species4", 
         all.x = TRUE)
     # output
-    dat <- merge(data.frame(species), dat, by.x = "species", by.y = "species2",
+    dat <- merge(data.frame(species), dat, by.x = "species", by.y = "species2", 
         all.x = TRUE)
     dat[, seq_len(4)]
 }

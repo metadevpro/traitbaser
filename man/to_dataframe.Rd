@@ -11,9 +11,9 @@ to_dataframe(response, keep_metadata = "clean")
 
 \item{keep_metadata}{Flag to indicate if metadatata should be handled.
 Suported values are:
-   - 'clean'     -  remove metadata (default one)
-   - 'raw'       -  remove metadata
-   - 'raw_links' -  remove metadata links}
+- 'clean'     -  remove metadata (default one)
+- 'raw'       -  remove metadata
+- 'raw_links' -  remove metadata links}
 }
 \value{
 \code{resource()} returns a resource object for a Hivepod backend.
