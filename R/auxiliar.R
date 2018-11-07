@@ -6,6 +6,20 @@ nullToNA <- function(x) {
     x
 }
 
+urlEncode <- function(value) {
+  if (is.null(value)) {
+    out <- "null"
+  } else {
+    out <- switch(
+      mode(value),
+      numeric = value,
+      character = paste0("\"", URLencode(value), "\""),
+      logical = tolower(as.character(value))
+      )
+  }
+  out
+}
+
 
 buildQueryConditions <- function(conditionList = NULL) {
     if (is.null(conditionList)) {

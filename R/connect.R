@@ -1,5 +1,3 @@
-require("httr")
-
 #' Creates a connection.
 #'
 #' Setup a connection to a given Traitbase backend with credentials.
@@ -14,7 +12,7 @@ require("httr")
 #' @examples
 #' \donttest{
 #' # not run
-#' cnx <- connect('http://www.traitbase.info', 'demo', '1234')
+#'  cnx <- connect(url = 'http://www.traitbase.info', user = 'KevCaz', pass  = '1234')
 #' }
 
 connect <- function(url = "http://www.traitbase.info", user = "demo", pass = "") {

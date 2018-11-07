@@ -23,10 +23,10 @@
 
 buildCondition <- function(variable, operator, value) {
     if (operator == "==") {
-        cond <- paste0("\"", variable, "\":", utils::URLencode(value))
+        cond <- paste0("\"", variable, "\":", urlEncode(value))
     }
     if (operator == "!=") {
-        cond <- paste0("\"", variable, "\":{\"$not\":{\"$eq\":", utils::URLencode(value),
+        cond <- paste0("\"", variable, "\":{\"$not\":{\"$eq\":", urlEncode(value),
             "}}")
     }
     cond
