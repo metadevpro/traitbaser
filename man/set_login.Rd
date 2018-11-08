@@ -21,6 +21,13 @@ get_login(user = NULL, pwd = NULL)
 Set and forget the user name and the password to be connected to the
 Traitbase API.
 }
+\details{
+\code{set_login()} sets the environmental variables  \code{TRAITBASE_USER}, \code{TRAITBASE_PWD}
+for the current R session. Note that if you want to set then permanently,
+you can add them in \code{.Renviron}, or your \code{.Rprofile} (see \code{Startup}).
+\code{set_login()} retrieves \code{TRAITBASE_USER}, \code{TRAITBASE_PWD} and calls \code{set_login()}
+if not set.
+}
 \section{Functions}{
 \itemize{
 \item \code{set_login}: set the environment variable \code{SPECIESPLUS_TOKEN}.

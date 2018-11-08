@@ -13,43 +13,37 @@
 #' This resource object can be used to make queries, count and manipulate data in the backend.
 #' @examples
 #' \donttest{
-#' cnx <- connect('http://www.traitbase.info', 'demo', '1234')
+#' cnx <- connect('http://www.traitbase.info')
 #' sp <- resource(cnx, 'species')
 #' ds <- resource(cnx, 'datasets')
 #' cont <- resource(cnx, 'contributors')
 #' }
 
 to_dataframe <- function(response, keep_metadata = "clean") {
-    if (!keep_metadata %in% c("clean", "raw", "raw_links")) {
-        message("keep_metadata has to be clean, raw or raw_links")
-    } else {
-        responseNA <- lapply(response, nullToNA)
-        dat <- unlist(responseNA)
-        if (length(responseNA) == 0) {
-            return(NULL)
-        }
+
+    keep_metadata <- match.arg(keep_metadata,  c("clean", "raw", "raw_links"))
+    responseNA <- lapply(response, nullToNA)
+    dat <- unlist(responseNA)
+    ##
+    if (length(responseNA)) {
         nvariales <- length(unlist(responseNA[[1L]]))
         ncases <- length(responseNA)
-        datamatrix <- matrix(data = dat, nrow = ncases, ncol = nvariales, 
+        datamatrix <- matrix(data = dat, nrow = ncases, ncol = nvariales,
             byrow = TRUE)
         colnames(datamatrix) <- names(unlist(responseNA[[1L]]))
         datamatrix <- as.data.frame(datamatrix)
         utils::head(datamatrix)
+        ##
         idnum <- grep("_id", colnames(datamatrix), fixed = TRUE)
         links <- grep("_links.", colnames(datamatrix), fixed = TRUE)
         optionalsid <- grep("_", colnames(datamatrix), fixed = TRUE)
         optionals <- optionalsid[-which(optionalsid == idnum)]
-        if (keep_metadata == "clean") {
-            clean <- datamatrix[, -optionals]
-            return(clean)
-        }
-        if (keep_metadata == "raw") {
-            raw <- datamatrix[, -links]
-            return(raw)
-        }
-        if (keep_metadata == "raw_links") {
-            raw_links <- datamatrix
-            return(raw_links)
-        }
-    }
+        ##
+        out <- switch(keep_metadata,
+            clean = datamatrix[, -optionals],
+            raw = datamatrix[, -links],
+            raw_links = datamatrix
+        )
+    } else out <- NULL
+    out
 }

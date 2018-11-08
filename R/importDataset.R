@@ -7,7 +7,7 @@
 #' @export
 #' @examples
 #' \donttest{
-#' cnx <- connect('http://www.traitbase.info', 'demo', '1234')
+#' cnx <- connect('http://www.traitbase.info')
 #' fpath <- system.file('extdata', 'sample-error.csv', package='traitbaser')
 #' csvData <- readLines(fpath)
 #' errors <- importDataset(cnx, csvData)

@@ -19,7 +19,7 @@ Validates a dataset prior an import operation.
 }
 \examples{
 \donttest{
-cnx <- connect('http://www.traitbase.info', 'demo', '1234')
+cnx <- connect('http://www.traitbase.info')
 fpath <- system.file('extdata', 'sample-error.csv', package='traitbaser')
 csvData <- readLines(fpath)
 errors <- validateDataset(cnx, csvData)
