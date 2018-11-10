@@ -78,3 +78,34 @@ privateImport <- function(cnx, csvData, validateOnly = TRUE) {
 
     httr::content(q1, type = "application/json")
 }
+
+
+
+#### Conversion to dataframe ####
+
+## Converts the list of data the traitbase returs into a data frame.
+
+toDataframe <- function(response) {
+  ##
+  responseNA <- lapply(
+    lapply(response, nullToNA),
+    ## _links is the only list so I remove it here
+    Filter, f = Negate(is.list)
+  )
+  if (length(responseNA)) {
+    nm <- unique(unlist(lapply(responseNA, names)))
+    ## add names if missing + rbind
+    out <- apply(do.call(rbind, lapply(responseNA, addNames, nm)), 2, unlist)
+
+  } else out <- NULL
+  ##
+  out
+}
+
+addNames <- function(x, nm) {
+  tmp <- setdiff(nm, names(x))
+  if (!is.null(tmp)) x[tmp] <- NA
+  x
+}
+
+# parseLinks <- function()

@@ -1,4 +1,4 @@
-#' Imports a dataset intro Traitbase.
+#' Imports a dataset into Traitbase.
 #'
 #' @param cnx The connection to traitbase service.
 #' @param csvData The data in cvs format (string)

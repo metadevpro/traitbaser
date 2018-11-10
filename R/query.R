@@ -14,20 +14,20 @@
 #' @export
 #' @examples
 #' \donttest{
-#' cnx <- connect('http://www.traitbase.info', 'demo', '1234')
+#' cnx <- connect('http://www.traitbase.info')
 #' off <- resource(cnx, 'species')
 #'
-#' query(off)
+#' res <- query(off)
 #' query(off, conditions=buildCondition('species', '==', 'Bombus')  )
 #' query(off, limit=2, skip=0)
 #' query(off, limit=2, skip=2)
 #' }
 
-query <- function(resource, limit = -1, skip = 0, conditions = NULL, sort, 
+query <- function(resource, limit = -1, skip = 0, conditions = NULL, sort,
     selectFields, distinct) {
-    urlbase <- httr::handle(resource[[1]])
-    aut <- httr::authenticate(resource[[2]], resource[[3]])
-    
+    urlbase <- httr::handle(resource[[1L]])
+    aut <- httr::authenticate(resource[[2L]], resource[[3L]])
+
     query <- ""
     prefix <- "?"
     if (limit != -1) {
@@ -42,10 +42,10 @@ query <- function(resource, limit = -1, skip = 0, conditions = NULL, sort,
         query <- paste0(query, prefix, buildQueryConditions(conditions))
         prefix <- "&"
     }
-    
-    q1 <- httr::GET(handle = urlbase, config = aut, path = paste("api/", 
+
+    q1 <- httr::GET(handle = urlbase, config = aut, path = paste("api/",
         resource[[5]], query, sep = ""))
     dataQ1 <- httr::content(q1, type = "application/json")
     ## output
-    to_dataframe(dataQ1)
+    toDataframe(dataQ1)
 }
