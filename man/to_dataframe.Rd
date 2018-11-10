@@ -24,7 +24,7 @@ Private function. Converts returned JSON data into an R dataframe.
 }
 \examples{
 \donttest{
-cnx <- connect('http://www.traitbase.info', 'demo', '1234')
+cnx <- connect('http://www.traitbase.info')
 sp <- resource(cnx, 'species')
 ds <- resource(cnx, 'datasets')
 cont <- resource(cnx, 'contributors')

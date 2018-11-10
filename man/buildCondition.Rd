@@ -23,7 +23,7 @@ Returns a condition clause to be used in queries.
 }
 \examples{
 \donttest{
-cnx <- connect('http://www.traitbase.info', 'demo', '1234')
+cnx <- connect('http://www.traitbase.info')
 off <- resource(cnx, 'species')
 
 count(off)
