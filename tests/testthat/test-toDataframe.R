@@ -15,6 +15,7 @@ test_that("test toDataframe", {
 })
 
 test_that("test addNames", {
+  r1 <- list("_id"="abcd1234", a="a1", b = 12, c = FALSE, "_links" = list(a="b"))
   r3 <- addNames(r1, c("_id", "a", "b", "c", "d", "_links"))
   expect_true("d" %in% names(r3))
   expect_true(is.na(r3$d))

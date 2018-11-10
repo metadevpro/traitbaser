@@ -11,5 +11,5 @@ test_that("testa the `!=` operator", {
 })
 
 test_that("tests other operators", {
-  expect_error(buildCondition("city", "<=", "Seville" ), "'arg' should be one of “!=”, “==”")
+  expect_error(buildCondition("city", "<=", "Seville" ))
 })
