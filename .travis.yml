@@ -1,6 +1,15 @@
 language: r
 sudo: required
 
+matrix:
+  include:
+    - os: linux
+      r: release
+      env: NOT_CRAN=true
+    - os: linux
+      r: devel
+      env: NOT_CRAN=false
+
 r_github_packages:
   - hadley/httr
   - jimhester/covr

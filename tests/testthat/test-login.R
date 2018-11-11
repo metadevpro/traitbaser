@@ -1,4 +1,6 @@
 context("login")
+skip_on_cran()
+skip_if_no_auth()
 # store login
 ologin <- get_login()
 

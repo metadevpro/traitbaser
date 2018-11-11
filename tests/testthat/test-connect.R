@@ -1,4 +1,6 @@
 context("connect")
+skip_on_cran()
+skip_if_no_auth()
 
 test_that("connect should work", {
   out <- connect("http://www.traitbase.info")

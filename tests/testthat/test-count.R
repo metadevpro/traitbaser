@@ -1,4 +1,6 @@
 context("count")
+skip_on_cran()
+skip_if_no_auth()
 
 test_that("count traits > -1", {
   cnx <- connect("http://www.traitbase.info")

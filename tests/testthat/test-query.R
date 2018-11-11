@@ -1,4 +1,6 @@
 context("query")
+skip_on_cran()
+skip_if_no_auth()
 cnx <- connect("http://www.traitbase.info")
 
 test_that("query species", {
