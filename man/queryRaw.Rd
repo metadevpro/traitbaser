@@ -21,7 +21,7 @@ https://github.com/wprl/baucis/wiki/Query-String-Parameters
 }
 \examples{
 \donttest{
-cnx <- connect('http://www.traitbase.info', 'demo', '1234')
+cnx <- connect('http://www.traitbase.info')
 spe <- resource(cnx, 'species')
 
 queryRaw(spe, '?skip=2&limit=3')

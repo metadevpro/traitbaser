@@ -84,8 +84,6 @@ privateImport <- function(cnx, csvData, validateOnly = TRUE) {
 #### Conversion to dataframe ####
 
 ## Converts the list of data the traitbase returs into a data frame.
-response <- dataQ1
-
 toDataframe <- function(response) {
   ##
   responseNA <- lapply(
@@ -116,6 +114,7 @@ addNames <- function(x, nm) {
   x
 }
 
+## parse _links columns 
 parseLinks <- function(response) {
   if (length(response)) {
     ## NB _links is the only list

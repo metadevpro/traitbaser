@@ -22,7 +22,8 @@ test_that("query species limit=2 skip=1", {
 
 test_that("query species limit=1 with condition", {
   resource <- resource(cnx, "species")
-  out <- query(resource, limit=1, conditions=buildCondition("genus", "==", "unit-test-sample" ))
+  out <- query(resource, limit = 1,
+    conditions = buildCondition("genus", "==", "unit-test-sample" ))
   expect_null(out)
 })
 

@@ -1,16 +1,16 @@
 #' @name parseErrors
 #'
-#' @title Helper function to parse errors fron validateDataset().
+#' @title Helper function to parse errors from validateDataset().
 #'
 #' @description Transform the hard to read output of validateDataset() in
-#' a usefull format.
+#' a useful format.
 #'
 #' @param errors Output of validateDataset()
 #'
 #' @return list of errors (err) and lines where encountered (tax).
 #'
 #' @examples
-#' #not run
+#' # not run
 #'
 #' @export
 parseErrors <- function(errors) {
@@ -28,7 +28,7 @@ parseErrors <- function(errors) {
         err <- temp[seq(2, length(temp), 2)]
         cod <- temp[seq(1, length(temp), 2)]
         taxonomy <- err[which(cod == "402")]
-        tax <- as.numeric(substr(taxonomy, regexpr("at line", taxonomy) + 
+        tax <- as.numeric(substr(taxonomy, regexpr("at line", taxonomy) +
             7, nchar(taxonomy))) - 1  #to remove header, which is line 1
     }
     list(err, tax)
