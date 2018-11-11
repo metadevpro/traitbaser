@@ -20,6 +20,7 @@ Imports:
 Suggests:
     knitr,
     testthat (>= 0.8.0),
+    tibble,
     rmarkdown
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)

@@ -84,6 +84,7 @@ privateImport <- function(cnx, csvData, validateOnly = TRUE) {
 #### Conversion to dataframe ####
 
 ## Converts the list of data the traitbase returs into a data frame.
+response <- dataQ1
 
 toDataframe <- function(response) {
   ##
@@ -95,8 +96,15 @@ toDataframe <- function(response) {
   if (length(responseNA)) {
     nm <- unique(unlist(lapply(responseNA, names)))
     ## add names if missing + rbind
-    out <- apply(do.call(rbind, lapply(responseNA, addNames, nm)), 2, unlist)
-
+    out <- as.data.frame(
+      do.call(rbind,
+        lapply(
+          lapply(responseNA, addNames, nm),
+          do.call, what = cbind
+        )
+      )
+    )
+    class(out) <- c("tbl_df", "tbl", "data.frame")
   } else out <- NULL
   ##
   out
@@ -108,4 +116,19 @@ addNames <- function(x, nm) {
   x
 }
 
-# parseLinks <- function()
+parseLinks <- function(response) {
+  if (length(response)) {
+    ## NB _links is the only list
+    out <- as.data.frame(
+      do.call(
+        rbind,
+        lapply(
+          lapply(response, Filter, f = is.list),
+          unlist)
+        )
+      )
+    names(out) <- gsub("_links.", "", names(out), fixed = TRUE)
+    class(out) <- c("tbl_df", "tbl", "data.frame")
+  } else out <- NULL
+  out
+}
