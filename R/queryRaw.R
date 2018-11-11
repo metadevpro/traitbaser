@@ -11,7 +11,7 @@
 #' @export
 #' @examples
 #' \donttest{
-#' cnx <- connect('http://www.traitbase.info', 'demo', '1234')
+#' cnx <- connect('http://www.traitbase.info')
 #' spe <- resource(cnx, 'species')
 #'
 #' queryRaw(spe, '?skip=2&limit=3')
@@ -24,5 +24,5 @@ queryRaw <- function(resource, query) {
         resource[[5L]], query, sep = ""))
     dataQ1 <- httr::content(q1, type = "application/json")
     ## output
-    to_dataframe(dataQ1)
+    toDataframe(dataQ1)
 }

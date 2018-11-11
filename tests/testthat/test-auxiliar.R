@@ -1,10 +1,19 @@
 context("auxiliar")
 
 
-test_that("tests protectCommas", {
+test_that("tests nullToNA", {
   expect_equal(unlist(nullToNA(list(2, NULL, 3))),
     c(2, NA, 3))
 })
+
+test_that("tests urlEncode", {
+  expect_equal(urlEncode(NULL), "null")
+  expect_equal(urlEncode(TRUE), "true")
+  expect_equal(urlEncode(9.2), 9.2)
+  expect_equal(urlEncode(2+2i), 2+2i)
+  expect_equal(urlEncode("cool"), "\"cool\"")
+})
+
 
 
 test_that("tests protectCommas", {

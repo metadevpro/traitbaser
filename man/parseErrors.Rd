@@ -2,7 +2,7 @@
 % Please edit documentation in R/parseErrors.R
 \name{parseErrors}
 \alias{parseErrors}
-\title{Helper function to parse errors fron validateDataset().}
+\title{Helper function to parse errors from validateDataset().}
 \usage{
 parseErrors(errors)
 }
@@ -14,9 +14,9 @@ list of errors (err) and lines where encountered (tax).
 }
 \description{
 Transform the hard to read output of validateDataset() in
-a usefull format.
+a useful format.
 }
 \examples{
-#not run
+# not run
 
 }

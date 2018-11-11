@@ -20,7 +20,7 @@ Setups and returns a resource available in a Hivepod backend.
 }
 \examples{
 \donttest{
-cnx <- connect('http://www.traitbase.info', 'demo', '1234')
+cnx <- connect('http://www.traitbase.info')
 exo <- resource(cnx, 'species')
 whe <- resource(cnx, 'schemas')
 }

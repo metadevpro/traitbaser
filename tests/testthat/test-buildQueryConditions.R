@@ -1,6 +1,5 @@
 context("buildQueryConditions")
 
-
 test_that("test null returns NA", {
   out <- buildQueryConditions(NULL)
   expect_equal(out, NA)

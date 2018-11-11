@@ -30,10 +30,10 @@ Executes a query on the server backend and returns data.
 }
 \examples{
 \donttest{
-cnx <- connect('http://www.traitbase.info', 'demo', '1234')
+cnx <- connect('http://www.traitbase.info')
 off <- resource(cnx, 'species')
 
-query(off)
+res <- query(off)
 query(off, conditions=buildCondition('species', '==', 'Bombus')  )
 query(off, limit=2, skip=0)
 query(off, limit=2, skip=2)

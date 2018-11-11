@@ -12,7 +12,7 @@
 #' @export
 #' @examples
 #' \donttest{
-#' cnx <- connect('http://www.traitbase.info', 'demo', '1234')
+#' cnx <- connect('http://www.traitbase.info')
 #' off <- resource(cnx, 'species')
 #'
 #' count(off)
@@ -22,12 +22,11 @@
 #' }
 
 buildCondition <- function(variable, operator, value) {
-    if (operator == "==") {
-        cond <- paste0("\"", variable, "\":", utils::URLencode(value))
-    }
-    if (operator == "!=") {
-        cond <- paste0("\"", variable, "\":{\"$not\":{\"$eq\":", utils::URLencode(value),
-            "}}")
-    }
-    cond
+    ope <- match.arg(operator, c("!=", "=="))
+    tmp <- ifelse(
+      ope == "==",
+      urlEncode(value),
+      paste0("{\"$not\":{\"$eq\":", urlEncode(value),"}}")
+    )
+    paste0("\"", variable, "\":", tmp)
 }

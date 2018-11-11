@@ -7,9 +7,9 @@
 cleanSpecies(species, verbose = TRUE, db = "itis")
 }
 \arguments{
-\item{species}{A vector of species to check}
+\item{species}{A vector of species to be checked.}
 
-\item{verbose}{logical. Print stuff? Default to TRUE}
+\item{verbose}{logical. Print stuff? Default set to \code{TRUE}.}
 
 \item{db}{Which db should be used 'itis' is the default}
 }

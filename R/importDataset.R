@@ -1,4 +1,4 @@
-#' Imports a dataset intro Traitbase.
+#' Imports a dataset into Traitbase.
 #'
 #' @param cnx The connection to traitbase service.
 #' @param csvData The data in cvs format (string)
@@ -7,7 +7,7 @@
 #' @export
 #' @examples
 #' \donttest{
-#' cnx <- connect('http://www.traitbase.info', 'demo', '1234')
+#' cnx <- connect('http://www.traitbase.info')
 #' fpath <- system.file('extdata', 'sample-error.csv', package='traitbaser')
 #' csvData <- readLines(fpath)
 #' errors <- importDataset(cnx, csvData)

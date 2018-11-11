@@ -4,8 +4,8 @@
 #'
 #' @description This correct misspellings, synonyms and flags not recognizes species.
 #'
-#' @param species A vector of species to check
-#' @param verbose logical. Print stuff? Default to TRUE
+#' @param species A vector of species to be checked.
+#' @param verbose logical. Print stuff? Default set to `TRUE`.
 #' @param db Which db should be used 'itis' is the default
 #'
 #' @return data.frame of original and corrected species.

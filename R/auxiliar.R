@@ -6,6 +6,16 @@ nullToNA <- function(x) {
     x
 }
 
+urlEncode <- function(value) {
+    if (is.null(value)) {
+        out <- "null"
+    } else {
+        out <- switch(mode(value), character = paste0("\"", utils::URLencode(value),
+            "\""), logical = tolower(as.character(value)), value)
+    }
+    out
+}
+
 
 buildQueryConditions <- function(conditionList = NULL) {
     if (is.null(conditionList)) {
@@ -42,26 +52,22 @@ protectCommas <- function(data) {
 
 # encode literal for CSV
 quote4csv <- function(data) {
-  if (is.logical(data)) {
-      data <- ifelse(data, "true", "false")
-  } else {
-    data <- protectCommas(paste0("", data))
-  }
-  data
+    if (is.logical(data)) {
+        data <- ifelse(data, "true", "false")
+    } else {
+        data <- protectCommas(paste0("", data))
+    }
+    data
 }
 
 
 privateImport <- function(cnx, csvData, validateOnly = TRUE) {
-    urlbase <- httr::handle(cnx[[1]])
-    aut <- httr::authenticate(cnx[[2]], cnx[[3]])
+    urlbase <- httr::handle(cnx[[1L]])
+    aut <- httr::authenticate(cnx[[2L]], cnx[[3L]])
     url <- "/api/import/dataset"
     mime <- httr::add_headers(`content-type` = "text/csv")
 
-    if (is.data.frame(csvData)) {
-        txtData = df2csv(csvData)
-    } else {
-        txtData = csvData
-    }
+    txtData <- ifelse(is.data.frame(csvData), df2csv(csvData), csvData)
 
     if (validateOnly) {
         url <- paste0(url, "?validateOnly=true")
@@ -71,4 +77,57 @@ privateImport <- function(cnx, csvData, validateOnly = TRUE) {
         body = txtData, encode = "raw", handle = urlbase)))
 
     httr::content(q1, type = "application/json")
+}
+
+
+
+#### Conversion to dataframe ####
+
+## Converts the list of data the traitbase returs into a data frame.
+toDataframe <- function(response) {
+  ##
+  responseNA <- lapply(
+    lapply(response, nullToNA),
+    ## _links is the only list so I remove it here
+    Filter, f = Negate(is.list)
+  )
+  if (length(responseNA)) {
+    nm <- unique(unlist(lapply(responseNA, names)))
+    ## add names if missing + rbind
+    out <- as.data.frame(
+      do.call(rbind,
+        lapply(
+          lapply(responseNA, addNames, nm),
+          do.call, what = cbind
+        )
+      )
+    )
+    class(out) <- c("tbl_df", "tbl", "data.frame")
+  } else out <- NULL
+  ##
+  out
+}
+
+addNames <- function(x, nm) {
+  tmp <- setdiff(nm, names(x))
+  if (!is.null(tmp)) x[tmp] <- NA
+  x
+}
+
+## parse _links columns 
+parseLinks <- function(response) {
+  if (length(response)) {
+    ## NB _links is the only list
+    out <- as.data.frame(
+      do.call(
+        rbind,
+        lapply(
+          lapply(response, Filter, f = is.list),
+          unlist)
+        )
+      )
+    names(out) <- gsub("_links.", "", names(out), fixed = TRUE)
+    class(out) <- c("tbl_df", "tbl", "data.frame")
+  } else out <- NULL
+  out
 }
