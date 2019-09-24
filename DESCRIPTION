@@ -1,6 +1,6 @@
 Package: traitbaser
 Title: R package providing API access to Traitbase https://www.traitbase.info
-Version: 0.0.0.9004
+Version: 0.0.0.9005
 Author: c( person("Pedro J.", "Molina", ,"pjmolina@gmail.com", role = c("aut",
     "cre")), person("Ignasi", "Bartomeus", , "nacho.bartomeus@gmail.com", role =
     c("aut", "cre")) )
@@ -24,4 +24,4 @@ Suggests:
     rmarkdown
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
