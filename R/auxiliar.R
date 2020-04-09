@@ -79,7 +79,20 @@ privateImport <- function(cnx, csvData, validateOnly = TRUE) {
     httr::content(q1, type = "application/json")
 }
 
+privateDeleteDatasetById <- function(cnx, datasetId) {
+  urlbase <- httr::handle(cnx[[1L]])
+  aut <- httr::authenticate(cnx[[2L]], cnx[[3L]])
+  url <- "/api/dataSets/deleteByIds"
+  mime <- httr::add_headers(`content-type` = "application/json")
+  payload <- paste0('["', datasetId, '"]')
 
+  httr::with_config(aut, httr::with_config(mime, q1 <- httr::POST(path = url,
+                                                                  body = payload,
+                                                                  encode = "raw",
+                                                                  handle = urlbase)))
+
+  httr::content(q1, type = "application/json")
+}
 
 #### Conversion to dataframe ####
 
@@ -114,7 +127,7 @@ addNames <- function(x, nm) {
   x
 }
 
-## parse _links columns 
+## parse _links columns
 parseLinks <- function(response) {
   if (length(response)) {
     ## NB _links is the only list
