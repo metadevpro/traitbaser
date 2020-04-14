@@ -55,7 +55,8 @@ deleteDatasetById(cnx, "5893230250271204003cf074")
 #deletes datasets, but not observations.
 #make better output
 
-
+deleteDatasetById(cnx = cnx, datasetId = "fake")
+#need better errors when id do not exist.
 
 
 

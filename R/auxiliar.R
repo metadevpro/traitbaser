@@ -97,6 +97,7 @@ privateDeleteDatasetById <- function(cnx, datasetId) {
                                                                   handle = urlbase)))
 
   httr::content(q1, type = "application/json")
+  message(paste(httr::http_status(q1)$message))
 }
 
 #### Conversion to dataframe ####
