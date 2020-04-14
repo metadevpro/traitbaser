@@ -19,19 +19,22 @@ parseErrors <- function(errors) {
     } else {
         message("This dataset is NOT valid")
     }
-    if (length(errors$warnings)) {
+    if (length(errors$warnings) > 0) {
         temp <- unlist(errors$warnings, use.names = FALSE)
         message(temp[seq(2, length(temp), 2)])
     }
-    if (length(errors$errors)) {
+    if (length(errors$errors) > 0) {
         temp <- unlist(errors$errors, use.names = FALSE)
         err <- temp[seq(2, length(temp), 2)]
         cod <- temp[seq(1, length(temp), 2)]
         taxonomy <- err[which(cod == "402")]
         tax <- as.numeric(substr(taxonomy, regexpr("at line", taxonomy) +
             7, nchar(taxonomy))) - 1  #to remove header, which is line 1
+        ambigous <- err[which(cod == "401")]
+        amb <- as.numeric(substr(ambigous, regexpr("at line", ambigous) +
+                                     7, nchar(ambigous))) - 1  #to remove header, which is line 1
+        list(errors = err, lines_unrecognized_taxa = tax, lines_ambigous_taxa = amb)
     }
-    list(err, tax)
 }
 
 
