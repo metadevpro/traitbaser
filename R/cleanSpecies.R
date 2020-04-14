@@ -20,6 +20,7 @@
 #' @export
 
 cleanSpecies <- function(species, verbose = TRUE, db = "itis") {
+    require(taxize)
     species <- as.character(species)
     # misspellings
     species2 <- unique(species)
@@ -36,21 +37,22 @@ cleanSpecies <- function(species, verbose = TRUE, db = "itis") {
         use.names = FALSE)
     synonym_names <- species3
     synonym_names[synonym_ids] <- accepted_names[1L]
-    key <- data.frame(species3, synonym_names)
+    key <- data.frame(species3, synonym_names, stringsAsFactors = FALSE)
     dat <- merge(dat, key, by.x = "matched_name2", by.y = "species3", all.x = TRUE)
     # clean non accepted species
     species4 <- unique(dat$synonym_names)
     species4 <- species4[!is.na(species4)]
-    out2 <- taxize::tax_name(species4, get = "species", db = "both", pref = "itis",
-        verbose = verbose)
+    out2 <- taxize::tax_name(species4, get = "species", db = db, pref = "itis",
+        verbose = verbose, messages = verbose)
     out2_u <- unique(out2$species)
     final_names <- species4
     final_names[which(!species4 %in% out2_u)] <- NA
-    key2 <- data.frame(species4, final_names)
+    key2 <- data.frame(species4, final_names, stringsAsFactors = FALSE)
     dat <- merge(dat, key2, by.x = "synonym_names", by.y = "species4",
         all.x = TRUE)
     # output
     dat <- merge(data.frame(species), dat, by.x = "species", by.y = "species2",
         all.x = TRUE)
+    colnames(dat) <- c("species", "accepted_synonyms", "matched_names", "filtred_names")
     dat[, seq_len(4)]
 }
