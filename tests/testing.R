@@ -4,8 +4,8 @@
 library(devtools)
 install_github("metadevpro/traitbaser")
 library(traitbaser)
-#cnx <- connect(url = "http://traitbase-qa.herokuapp.com/", "root", "bee4") #demo not working
-cnx <- connect(url = "https://traitbase-dev.herokuapp.com/", "root", "bee4") #demo not working
+#cnx <- connect(url = "http://traitbase-qa.herokuapp.com/", "", "") #demo not working
+cnx <- connect(url = "https://traitbase-dev.herokuapp.com/", "demo", "1234") #demo not working
 
 #Add data-----
 d <- read.csv("tests/testdata.csv", header = TRUE, sep = ";")
@@ -16,19 +16,19 @@ errors
 parseErrors(errors)
 
 #way to clean errors
-#fix
 #create helper functions
-#temp <- clean_species(species = d$species[1:3])
+temp <- cleanSpecies(species = d$species[1:3], verbose = FALSE)
 
 #Fix one manually
 d[7,"year"] <- 2019
 
 #test one by one
 d[7,]
-parseErrors(validateDataset(cnx, d[7,-21]))
+errors <- validateDataset(cnx, d[7,-21])
+parseErrors(errors)
 #FIX Error in paste error when no error.
 
-importDataset(cnx, d[7,-21]) #works!
+importDataset(cnx,csvData =  d[7,-21]) #works!
 
 
 #consult----
@@ -51,7 +51,8 @@ query(off, limit=2, skip=2)
 off <- resource(cnx, "dataSets") #Wierdspelling
 out <- query(off)
 datasetId <- out[7,1] #make safe
-deleteDatasetById(cnx, datasetId)
+deleteDatasetById(cnx, "5893230250271204003cf074")
+#deletes datasets, but not observations.
 #make better output
 
 
