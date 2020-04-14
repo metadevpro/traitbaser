@@ -20,7 +20,6 @@
 #' @export
 
 cleanSpecies <- function(species, verbose = TRUE, db = "itis") {
-    require(taxize)
     species <- as.character(species)
     # misspellings
     species2 <- unique(species)
