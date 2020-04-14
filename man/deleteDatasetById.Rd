@@ -19,8 +19,8 @@ Deelet a dataset from Traitbase.
 }
 \examples{
 \donttest{
-datasetId <- 'ds1234'
+datasetId <- '5d8a33d15fe80e52902098e3'
 cnx <- connect('http://www.traitbase.info')
-errors <- importDataset(cnx, datasetId)
+errors <- deleteDatasetById(cnx, datasetId)
 }
 }
