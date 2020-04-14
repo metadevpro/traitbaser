@@ -76,7 +76,12 @@ privateImport <- function(cnx, csvData, validateOnly = TRUE) {
     httr::with_config(aut, httr::with_config(mime, q1 <- httr::POST(path = url,
         body = txtData, encode = "raw", handle = urlbase)))
 
-    httr::content(q1, type = "application/json")
+    out <- httr::content(q1, type = "application/json")
+    if(is.list(out) == FALSE){
+      message("The web has a 404 or 505 error")
+    } else{
+      out
+    }
 }
 
 privateDeleteDatasetById <- function(cnx, datasetId) {
