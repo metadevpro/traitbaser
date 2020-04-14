@@ -124,7 +124,7 @@ toDataframe <- function(response) {
 addNames <- function(x, nm) {
   tmp <- setdiff(nm, names(x))
   if (!is.null(tmp)) x[tmp] <- NA
-  x
+  x[order(names(x))]
 }
 
 ## parse _links columns
