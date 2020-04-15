@@ -8,5 +8,6 @@ source("tests/search.R")
 source("tests/queryList.R")
 cnx <- connect(url = "https://traitbase-dev.herokuapp.com/", "root", "bee4") #demo not working
 dfOsmiaCaerulescens = search(cnx, species="Osmia caerulescens", traits="all")
+dfAll = search(cnx, species="all", traits="all")
 
 

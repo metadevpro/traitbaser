@@ -1,4 +1,3 @@
-library(plyr)
 
 getMeasures <- function(x) {
   obsID  = x$`_id`
@@ -54,10 +53,12 @@ search <- function(cnx, species = "all", traits = "all") {
 
   # Add traits info
   off <- resource(cnx, "observations")
-  #IB: Repetitive?
-  listObserv <- queryList(off, conditions = buildCondition("originalSpecies", "==", species))
-#IB Aqui falta el if de species "all".
-  measures = as.data.frame(do.call(rbind, lapply(listObserv, getMeasures)))
+  if (species == "all") {
+    listObserv <- queryList(off)
+  } else {
+    listObserv <- queryList(off, conditions = buildCondition("originalSpecies", "==", species))
+  }
+  measures = as.data.frame(do.call(plyr::rbind.fill, lapply(listObserv, getMeasures)))
   dfOut = merge(dfOut,
                 measures,
                 all.x = TRUE, by.x="_id", by.y="obsID")
