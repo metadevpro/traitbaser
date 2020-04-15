@@ -53,8 +53,12 @@ search <- function(cnx, species = "all", traits = "all") {
 
   # Add traits info
   off <- resource(cnx, "observations")
-  listObserv <- queryList(off, conditions = buildCondition("originalSpecies", "==", "Osmia caerulescens"))
-  measures = as.data.frame(do.call(rbind.fill, lapply(listObserv, getMeasures)))
+  if (species == "all") {
+    listObserv <- queryList(off)
+  } else {
+    listObserv <- queryList(off, conditions = buildCondition("originalSpecies", "==", species))
+  }
+  measures = as.data.frame(do.call(plyr::rbind.fill, lapply(listObserv, getMeasures)))
   dfOut = merge(dfOut,
                 measures,
                 all.x = TRUE, by.x="_id", by.y="obsID")
