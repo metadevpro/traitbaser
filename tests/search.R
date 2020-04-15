@@ -1,4 +1,3 @@
-library(plyr)
 
 getMeasures <- function(x) {
   obsID  = x$`_id`
@@ -55,7 +54,7 @@ search <- function(cnx, species = "all", traits = "all") {
   # Add traits info
   off <- resource(cnx, "observations")
   listObserv <- queryList(off, conditions = buildCondition("originalSpecies", "==", "Osmia caerulescens"))
-  measures = as.data.frame(do.call(rbind, lapply(listObserv, getMeasures)))
+  measures = as.data.frame(do.call(rbind.fill, lapply(listObserv, getMeasures)))
   dfOut = merge(dfOut,
                 measures,
                 all.x = TRUE, by.x="_id", by.y="obsID")
