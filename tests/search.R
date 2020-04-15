@@ -54,11 +54,13 @@ search <- function(cnx, species = "all", traits = "all") {
 
   # Add traits info
   off <- resource(cnx, "observations")
-  listObserv <- queryList(off, conditions = buildCondition("originalSpecies", "==", "Osmia caerulescens"))
+  #IB: Repetitive?
+  listObserv <- queryList(off, conditions = buildCondition("originalSpecies", "==", species))
+#IB Aqui falta el if de species "all".
   measures = as.data.frame(do.call(rbind, lapply(listObserv, getMeasures)))
   dfOut = merge(dfOut,
                 measures,
                 all.x = TRUE, by.x="_id", by.y="obsID")
-
+#IB: Aqui se podria filtrar por trait.
   return(dfOut)
 }
