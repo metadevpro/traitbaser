@@ -11,10 +11,7 @@ getMeasures <- function(x) {
   out
 }
 
-search <- function(species = "all", traits = "all") {
-
-  # TODO: conexión aquí???
-  cnx <- connect(url = "https://traitbase-dev.herokuapp.com/", "root", "bee4") #demo not working
+search <- function(cnx, species = "all", traits = "all") {
 
   # Retrieve species
   off <- resource(cnx, "species")
