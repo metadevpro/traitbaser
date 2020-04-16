@@ -35,10 +35,10 @@ search <- function(cnx, species = "all", traits = "all") {
   }
 
   # LEFT JOIN, add species data into observations data
-  names(dfSpecies)[names(dfSpecies) == "_id"] <- "specie"
+  names(dfSpecies)[names(dfSpecies) == "species"] <- "originalSpecies" # In my view, previous "_id" variable is not working properly
   dfOut = merge(dfObservations,
-                dfSpecies[, c("specie","genus","species","order","superfamily","family","tribe","subgenus")],
-                all.x = TRUE, by="specie")
+                dfSpecies[, c("originalSpecies","genus","order","superfamily","family","tribe","subgenus")],
+                all.x = TRUE, by="originalSpecies")
 
   # Add dataset info
   off <- resource(cnx, "dataSets")
