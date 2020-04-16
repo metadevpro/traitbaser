@@ -58,7 +58,7 @@ search <- function(cnx, species = "all", traits = "all") {
   } else {
     listObserv <- queryList(off, conditions = buildCondition("originalSpecies", "==", species))
   }
-  measures = as.data.frame(do.call(plyr::rbind.fill, lapply(listObserv, getMeasures)))
+  measures = do.call(plyr::rbind.fill, lapply(listObserv, getMeasures))
   dfOut = merge(dfOut,
                 measures,
                 all.x = TRUE, by.x="_id", by.y="obsID")
