@@ -16,8 +16,10 @@ list_species_dev = c("589322e150271204003cf066","589323b650271204003cf11c","5893
 # Halictus rubicundus: 589323bd50271204003cf11f -> dev: 5 contributors
 
 cnx_dev <- connect(url = "https://traitbase-dev.herokuapp.com/", "root", "bee4")
+
 df_contributors_dev = contributor(cnx_dev, list_species_dev)
 head(df_contributors_dev)
+
 
 ########################################
 
@@ -29,8 +31,9 @@ list_species = c("5b04107a2265c5000fab1b98","5b04145b2265c5000fab2a7f","5b041494
 # Bombus pascuorum: 5b04145b2265c5000fab2a7f -> real site: 47
 # Halictus rubicundus: 5b0414942265c5000fab49e4 -> real site: 52
 
-
 cnx <- connect(url = "https://traitbase.info/", "root", "bee4")
 df_contributors_real = contributor(cnx, list_species)
 head(df_contributors_real)
 
+# NOTE: Do not use the whole list of bees (19733 ids). Connection to site is rejected after several
+# scrapings.
