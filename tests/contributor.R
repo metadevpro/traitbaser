@@ -8,11 +8,10 @@ contributor <- function(cnx, list_species) {
   # Do not compile the full list of contributors for 19733 species. A connection problem appears
   #after several contributor scrapings.
 
-  # off <- resource(cnx, "species")
-  # if (list_species == "all") {
-  #   df_species = query(off)
-  #   list_species <- as.vector(df_species$`_id`)
-  #   }
+  if (length(list_species) > 400) {
+    print(paste("Error: The total amount of species IDs should be less than or equal to 400"))
+    return(NULL)
+  }
 
   # # Datasets info
   # off <- resource(cnx, "dataSets")

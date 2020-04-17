@@ -35,5 +35,12 @@ cnx <- connect(url = "https://traitbase.info/", "root", "bee4")
 df_contributors_real = contributor(cnx, list_species)
 head(df_contributors_real)
 
-# NOTE: Do not use the whole list of bees (19733 ids). Connection to site is rejected after several
-# scrapings.
+# NOTE: Do not use the whole list of bees (19733 ids). Connection to site is rejected after 424
+# scrapings approximately.
+
+off <- resource(cnx, "species")
+df_species = query(off)
+list_species <- as.vector(df_species$`_id`)
+
+df_contributors_real = contributor(cnx, list_species)
+
