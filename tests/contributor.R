@@ -5,6 +5,15 @@ contributor <- function(cnx, list_species) {
   off <- resource(cnx, "contributors")
   df_contributors = query(off)
 
+  # Do not compile the full list of contributors for 19733 species. A connection problem appears
+  #after several contributor scrapings.
+
+  # off <- resource(cnx, "species")
+  # if (list_species == "all") {
+  #   df_species = query(off)
+  #   list_species <- as.vector(df_species$`_id`)
+  #   }
+
   # # Datasets info
   # off <- resource(cnx, "dataSets")
   # df_datasets = query(off)
