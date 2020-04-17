@@ -8,8 +8,8 @@ contributor <- function(cnx, list_species) {
   # Do not compile the full list of contributors for 19733 species. A connection problem appears
   #after several contributor scrapings.
 
-  if (length(list_species) > 400) {
-    print(paste("Error: The total amount of species IDs should be less than or equal to 400"))
+  if (length(list_species) > 100) {
+    print(paste("Error: The total amount of species IDs should be less than or equal to 100"))
     return(NULL)
   }
 

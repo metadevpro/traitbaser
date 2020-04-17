@@ -35,12 +35,14 @@ cnx <- connect(url = "https://traitbase.info/", "root", "bee4")
 df_contributors_real = contributor(cnx, list_species)
 head(df_contributors_real)
 
-# NOTE: Do not use the whole list of bees (19733 ids). Connection to site is rejected after 424
-# scrapings approximately.
+# NOTE: Do not use the whole list of bees (19733 ids). Connection to site is rejected after 100
+# scrapings or so. Same issue arises if contributor() is runing continuosly.
 
-off <- resource(cnx, "species")
+cnx2 <- connect(url = "https://traitbase.info/", "root", "bee4")
+off <- resource(cnx2, "species")
 df_species = query(off)
 list_species <- as.vector(df_species$`_id`)
+df_contributors_real = contributor(cnx2, list_species[1:50])
 
-df_contributors_real = contributor(cnx, list_species)
+# Notice there are a large number of species without contributors.
 
