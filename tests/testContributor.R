@@ -26,10 +26,11 @@ head(df_contributors_dev)
 list_species = c("5b04107a2265c5000fab1b98","5b04145b2265c5000fab2a7f","5b0414942265c5000fab49e4")
 
 # Andrena agilissima: 5b04107a2265c5000fab1b98 -> real site: 17 contr.
-# Bombus pascuorum: 5b04145b2265c5000fab2a7f -> dev: 5 contributors, real: 47
-# Halictus rubicundus: 5b0414942265c5000fab49e4 -> dev: 5 contributors, real: 52
+# Bombus pascuorum: 5b04145b2265c5000fab2a7f -> real site: 47
+# Halictus rubicundus: 5b0414942265c5000fab49e4 -> real site: 52
 
 
 cnx <- connect(url = "https://traitbase.info/", "root", "bee4")
 df_contributors_real = contributor(cnx, list_species)
 head(df_contributors_real)
+
