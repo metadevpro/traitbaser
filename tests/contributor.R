@@ -5,15 +5,15 @@ contributor <- function(cnx, list_species) {
   off <- resource(cnx, "contributors")
   df_contributors = query(off)
 
-  # Datasets info
-  off <- resource(cnx, "dataSets")
-  df_datasets = query(off)
+  # # Datasets info
+  # off <- resource(cnx, "dataSets")
+  # df_datasets = query(off)
 
   # Get contributors info for each species
 
   for (i in 1:length(list_species)){
 
-    #Access website an get html
+    #Access website and get html
 
     url_base = paste0(cnx[[1]][1],"query/species/")
     url = paste0(url_base,list_species[i])
