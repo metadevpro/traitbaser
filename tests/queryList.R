@@ -24,3 +24,18 @@ queryList <- function(resource, limit = -1, skip = 0, conditions = NULL, sort,
   ## output
   dataQ1
 }
+
+queryInternal <- function(resource, pathInternal, todataframe = TRUE) {
+    urlbase <- httr::handle(resource[[1L]])
+    aut <- httr::authenticate(resource[[2L]], resource[[3L]])
+
+    q1 <- httr::GET(handle = urlbase, config = aut, path = pathInternal)
+    dataQ1 <- httr::content(q1, type = "application/json")
+    ## output
+    if(todataframe){
+      out <- toDataframe(dataQ1)
+    } else {
+      out <- dataQ1
+    }
+    return(out)
+  }
