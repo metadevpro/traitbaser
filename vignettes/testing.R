@@ -35,7 +35,9 @@ importDataset(cnx,csvData =  d[7,-21]) #works!
 #test query
 off <- resource(cnx, "species")
 
-query(off) #query all database.
+off <- resource(cnx, resourceName = "observations")
+
+query(resource = off) #query all database.
 query(off, conditions = buildCondition("genus", "==", "Bombus ")) #fix example query species for genus.
 ##FUCK genus has an space at the end FIX IN DATABASE!!!!
 query(off, conditions = buildCondition("species", "==", "Bombus terrestris")) #fix example query species for genus.
@@ -60,4 +62,9 @@ deleteDatasetById(cnx = cnx, datasetId = "fake")
 
 
 
+response[[1]]
+response <- response[[(33)]]
+response[[34]]
 
+
+dataQ1[[1]]$measures

@@ -1,7 +1,7 @@
 #' Validates a dataset prior an import operation.
 #'
 #' @param cnx The connection to traitbase service.
-#' @param csvData The data in cvs format (string)
+#' @param csvData The data in cvs format (string) #Also accepts data.frame
 #'
 #' @return Returns a list of errors if any. valid=(true|false), imported=false
 #' @export
