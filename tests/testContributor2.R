@@ -1,4 +1,5 @@
 library(traitbaser)
+library(tidyr)
 
 source("R/auxiliar.R")
 source("tests/search.R")
@@ -31,13 +32,3 @@ list_species = c("5b04107a2265c5000fab1b98","5b04145b2265c5000fab2a7f","5b041494
 cnx <- connect(url = "https://traitbase.info/", "root", "bee4")
 df_contributors_real = contributor2(cnx, list_species)
 head(df_contributors_real)
-
-#Large list of species
-
-cnx <- connect(url = "https://traitbase.info/", "root", "bee4")
-off <- resource(cnx, "species")
-df_species = query(off)
-list_species <- as.vector(as.character(df_species$`_id`))
-df_contributors_real = contributor2(cnx, list_species[1:300])
-
-# Notice that there are a large number of species without contributors.
