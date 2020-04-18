@@ -1,8 +1,13 @@
 ---
 title: "Getting started"
-author: "I. Bartomeus"
-date: "4/14/2020"
-output: html_document
+output: rmarkdown::html_vignette
+author: Ignasi Bartomeus
+vignette: >
+  %\VignetteIndexEntry{Getting started}
+  \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
