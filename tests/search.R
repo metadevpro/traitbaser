@@ -10,7 +10,7 @@ getMeasures <- function(x) {
   out
 }
 
-search <- function(cnx, species = "all", traits = "all") {
+search <- function(cnx, species = "all", traits = "all", showID=FALSE) {
 
   # Retrieve species
   off <- resource(cnx, "species")
@@ -67,13 +67,21 @@ search <- function(cnx, species = "all", traits = "all") {
                 measures,
                 all.x = TRUE, by.x="observation_id", by.y="obsID")
 
+  # Rename columns
+  names(dfOut)[names(dfOut) == "name"] <- "dataset_name"
+  names(dfOut)[names(dfOut) == "credit"] <- "dataset_credit"
+  names(dfOut)[names(dfOut) == "description"] <- "dataset_description"
+  names(dfOut)[names(dfOut) == "doi"] <- "dataset_doi"
+  dfOut = dfOut[, names(dfOut) != "dataSet_name"]
+
+  # Remove ID columns
+  dfOut = dfOut[, -(1:5)]
+
 #IB: Aqui se podria filtrar por trait.
   #Pero entiendo que es postprocesado, e-g trait = "IT" solo da m_IT.
 #NOTA: Si quieres todas las observaciones con traits = "IT" requiere bajar todas las observaciones, verdad?
   #si es asi, no hace falta modificar nada más, pero puede ser lento cuando haya muchas observacions.
 #NOTA: Falta una function to ask for metadata (basically query schema and traits databases)
-#Tambien se podria añadir un parametro show_id = FALSE que esconda: _id, dataSet, specie,__v,_createdAt,
-  #Se puede renombrar algun campo como: name -> dataset_name, dataset_credit, dataset_description
   #Se puede reordenar para que la taxonomia quede junta, las fechas tambien, etc...
   return(dfOut)
 }
