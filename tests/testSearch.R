@@ -7,6 +7,7 @@ source("R/auxiliar.R")
 source("R/query.R")
 source("tests/search.R")
 source("tests/queryList.R")
+source("tests/contributor.R")
 cnx <- connect(url = "https://traitbase-dev.herokuapp.com/", "root", "bee4") #demo not working
 dfOsmiaCaerulescens = search(cnx, species="Osmia caerulescens", traits="all")
 head(dfOsmiaCaerulescens)

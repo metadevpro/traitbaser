@@ -33,6 +33,7 @@ search <- function(cnx, species = "all", traits = "all") {
   } else {
     dfObservations = query(off_obs, conditions = buildCondition("originalSpecies", "==", species) )
   }
+  names(dfObservations)[names(dfObservations) == "_id"] <- "observation_id"
 
   # LEFT JOIN, add species data into observations data
   names(dfSpecies)[names(dfSpecies) == "_id"] <- "specie"
@@ -49,26 +50,23 @@ search <- function(cnx, species = "all", traits = "all") {
                 all.x = TRUE, by="dataSet")
 
   # Add contributors info
-  # TODO: aquí, en teoría solo un contributor por dataSet? Como nos aseguramos que es único
-  # Podriamos bajarnos todos los contributors para ese dataset Y concatenarlos en un solo campo?
-  # molaria hacer algo parecido a lo que has hecho con traits, pero no veo como,
-  # mis intentos en contributor_nacho.R Aqui se podria bajar solo los nombres concatenados,
-  # y la function contributor para quien quiera todos los detalles.
+  dfContributors = contributor(cnx, vector_species = idSpecies)
+  dfOut = merge(dfOut,
+                dfContributors[, c("observation_id", setdiff(names(dfContributors), names(dfOut)))],
+                all.x = TRUE, by="observation_id")
 
   # Add traits info
-  #off <- resource(cnx, "observations")
   if (species == "all") {
-    #listObserv <- queryList(off_obs)
     listObserv <- query(off_obs, todataframe = FALSE)
   } else {
-    #listObserv <- queryList(off_obs, conditions = buildCondition("originalSpecies", "==", species))
     listObserv <- query(off_obs, conditions = buildCondition("originalSpecies", "==", species),
                         todataframe = FALSE)
   }
   measures = do.call(plyr::rbind.fill, lapply(listObserv, getMeasures))
   dfOut = merge(dfOut,
                 measures,
-                all.x = TRUE, by.x="_id", by.y="obsID")
+                all.x = TRUE, by.x="observation_id", by.y="obsID")
+
 #IB: Aqui se podria filtrar por trait.
   #Pero entiendo que es postprocesado, e-g trait = "IT" solo da m_IT.
 #NOTA: Si quieres todas las observaciones con traits = "IT" requiere bajar todas las observaciones, verdad?
