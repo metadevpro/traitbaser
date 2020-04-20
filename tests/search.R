@@ -75,7 +75,9 @@ search <- function(cnx, species = "all", traits = "all", showID=FALSE) {
   dfOut = dfOut[, names(dfOut) != "dataSet_name"]
 
   # Remove ID columns
-  dfOut = dfOut[, -(1:5)]
+  if (!showID) {
+    dfOut = dfOut[, ! names(dfOut) %in% c("observation_id", "dataSet", "specie", "__v", "_createdAt")]
+  }
 
 #IB: Aqui se podria filtrar por trait.
   #Pero entiendo que es postprocesado, e-g trait = "IT" solo da m_IT.

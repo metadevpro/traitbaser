@@ -13,6 +13,7 @@ dfOsmiaCaerulescens = search(cnx, species="Osmia caerulescens", traits="all")
 head(dfOsmiaCaerulescens)
 dfAll = search(cnx, species="all", traits="all")
 head(dfAll)
-
+dfAll = search(cnx, species="all", traits="all", showID = TRUE)
+head(dfAll)
 
 
